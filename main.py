@@ -4,6 +4,8 @@ from minimax import *
 # ----------- PARAMETRES ------------
 
 DEPTH = 5  # Profondeur d'exploration de l'IA
+MAX_MOVES = 42  # Nombre total de pions autorisés
+nb_moves_played = 0  # Compteur de coups joués
 
 # ----------- INITIALISATION --------
 
@@ -19,7 +21,7 @@ current_player = int(choice)
 
 # ----------- BOUCLE DE JEU ---------
 
-while not is_terminal(board):
+while not is_terminal(board) and nb_moves_played < MAX_MOVES:
     print_board(board)
     print(f"Joueur {'Humain' if current_player == 1 else 'IA'} à toi de jouer.")
 
@@ -42,6 +44,8 @@ while not is_terminal(board):
         print("Colonne pleine, choisis une autre colonne.")
         continue  # ne pas changer de joueur si le coup est invalide
 
+    nb_moves_played += 1
+
     # Changer de joueur
     current_player *= -1
 
@@ -53,5 +57,7 @@ if winner == 1:
     print("Victoire du joueur HUMAIN ! ")
 elif winner == -1:
     print("Victoire de l'IA  !")
+elif nb_moves_played >= MAX_MOVES:
+    print("Match nul (limite de 42 pions atteinte) !")
 else:
     print("Match nul  !")
