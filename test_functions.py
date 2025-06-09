@@ -1,22 +1,15 @@
 from puissance4_game import *
+from minimax import *
 
+# Exemple pour forcer une victoire pour 1
 board = create_board()
-print_board(board)
-
-# On joue quelques coups
-make_move(board, 3, 1)
-make_move(board, 3, -1)
-make_move(board, 3, 1)
-make_move(board, 3, -1)
-make_move(board, 3, 1)
-make_move(board, 3, -1)  # ici colonne 3 va être pleine si on fait 6 coups
+board[5][0] = 1
+board[4][0] = 1
+board[3][0] = 1
+board[2][0] = 1  # alignement vertical colonne 0
 
 print_board(board)
-
-# On affiche les colonnes jouables
-valid_moves = get_valid_moves(board)
-print("Colonnes valides pour jouer :", valid_moves)
-
 print("Partie terminée ?", is_terminal(board))
-
 print("Valeur utility du plateau :", utility(board))
+print("Valeur min_value du plateau :", min_value(board, depth=3))
+print("Valeur max_value du plateau :", max_value(board, depth=3))
