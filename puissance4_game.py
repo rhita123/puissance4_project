@@ -5,7 +5,7 @@
 # Crée un plateau vide (6 lignes x 7 colonnes)
 def create_board():
     rows = 6
-    columns = 7
+    columns = 12
     board = [[0 for _ in range(columns)] for _ in range(rows)]
     return board
 
@@ -14,7 +14,7 @@ def print_board(board):
     print("Plateau actuel :")
     for row in board:
         print(row)
-    print("Colonnes : 0 1 2 3 4 5 6")
+    print("Colonnes : " + " ".join(str(i) for i in range(len(board[0]))))
     print("-" * 20)
 
 # Ajoute un pion dans la colonne choisie pour le joueur donné
