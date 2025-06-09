@@ -3,7 +3,7 @@ from minimax import *
 
 # ----------- PARAMETRES ------------
 
-DEPTH = 3  # Profondeur d'exploration de l'IA
+DEPTH = 4  # Profondeur d'exploration de l'IA
 
 # ----------- INITIALISATION --------
 
