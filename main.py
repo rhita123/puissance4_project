@@ -3,7 +3,7 @@ from minimax import *
 
 # ----------- PARAMETRES ------------
 
-DEPTH = 4  # Profondeur d'exploration de l'IA
+DEPTH = 5  # Profondeur d'exploration de l'IA
 
 # ----------- INITIALISATION --------
 
@@ -11,7 +11,11 @@ board = create_board()
 print_board(board)
 
 # Choisir qui commence : 1 = humain, -1 = IA
-current_player = 1
+choice = input("Qui commence ? (1 = Humain, -1 = IA) : ")
+while choice not in ['1', '-1']:
+    choice = input("Choix invalide. Qui commence ? (1 = Humain, -1 = IA) : ")
+
+current_player = int(choice)
 
 # ----------- BOUCLE DE JEU ---------
 

@@ -125,10 +125,13 @@ def minimax_decision(board, depth, player):
     alpha = float('-inf')
     beta = float('inf')
 
+    valid_moves = get_valid_moves(board)
+    valid_moves.sort(key=lambda x: abs((len(board[0]) // 2) - x))
+
     # Si joueur MAX (1), on cherche à maximiser
     if player == 1:
         best_value = float('-inf')
-        for move in get_valid_moves(board):
+        for move in valid_moves:
             new_board = [row.copy() for row in board]
             make_move(new_board, move, player)
             v = min_value(new_board, depth - 1, player, alpha, beta, start_time)
@@ -141,7 +144,7 @@ def minimax_decision(board, depth, player):
     # Si joueur MIN (-1), on cherche à minimiser
     else:
         best_value = float('inf')
-        for move in get_valid_moves(board):
+        for move in valid_moves:
             new_board = [row.copy() for row in board]
             make_move(new_board, move, player)
             v = max_value(new_board, depth - 1, player, alpha, beta, start_time)
