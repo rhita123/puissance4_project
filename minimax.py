@@ -1,6 +1,26 @@
 from puissance4_game import *
 import time
 
+def immediate_threat_check(board, player):
+    """Vérifie s'il existe une menace immédiate à bloquer ou une opportunité de gagner."""
+    opponent = -player
+    valid_moves = get_valid_moves(board)
+
+    for move in valid_moves:
+        # Vérifie si le joueur peut gagner immédiatement
+        temp_board = [row.copy() for row in board]
+        make_move(temp_board, move, player)
+        if check_winner(temp_board) == player:
+            return move  # Jouer pour gagner
+
+    for move in valid_moves:
+        # Vérifie si l'adversaire peut gagner immédiatement
+        temp_board = [row.copy() for row in board]
+        make_move(temp_board, move, opponent)
+        if check_winner(temp_board) == opponent:
+            return move  # Bloquer l'adversaire
+
+    return None  # Pas de menace immédiate
 
 def evaluate_window(window, player):
     """Évalue une fenêtre de 4 cases."""
@@ -127,6 +147,11 @@ def minimax_decision(board, depth, player):
 
     valid_moves = get_valid_moves(board)
     valid_moves.sort(key=lambda x: abs((len(board[0]) // 2) - x))
+
+    threat_move = immediate_threat_check(board, player)
+    if threat_move is not None:
+        print(f"Menace immédiate détectée → jouer colonne {threat_move}")
+        return threat_move
 
     # Si joueur MAX (1), on cherche à maximiser
     if player == 1:
